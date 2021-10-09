@@ -14,7 +14,9 @@ module.exports = async function (context, req) {
     const account = process.env.ACCOUNT_NAME || "";
     const muiClientId = process.env.MUI_CLIENT_ID || "";
     const containerName = process.env.CONTAINER || "";
-        
+    console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@ account=${account}, muiclientId=${muiClientId}, containerName=${containerName}`);
+
+
     // authenticate to storage account; first if  service principal provided (for local dev), then by managed user identity 
     const defaultAzureCredential = new DefaultAzureCredential({managedIdentityClientId: `${muiClientId}`});
     const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net`,defaultAzureCredential);
