@@ -13,9 +13,7 @@
   <main>
     <h1>Rehydrate Archive Blob Demo </h1>
     <h2>A vanilla javaScript app</h2>
-    <p>Loading content from the API: <b id="name">...</b></p>
     <p>Blob list: <div id="list">...</div></p>
-    <!-- <p id="whereToPrint">test</p> -->
   </main>
 
   <script>
@@ -30,14 +28,6 @@
       const { clientRequestId, requestId } = await resp.json();
       document.querySelector(`#blobSasUri-${divId}`).innerHTML = `rehydrating...clientRequestId:${clientRequestId}, requestId:${requestId}`;
     }
-
-    (async function() {
-        const { text } = await( await fetch(`/api/hellomsg`)).json();
-        document.querySelector('#name').textContent = text;
-        // let a = await fetch(`/api/hellomsg`);
-        // let b = await a.json();
-        // document.querySelector('#name').textContent = JSON.stringify(b, null, 4);
-    }());
 
     (async function() {
         let blResp = await fetch(`/api/listBlobs`);
