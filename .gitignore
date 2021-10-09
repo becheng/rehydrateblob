@@ -1,0 +1,6 @@
+.env
+scratchpad.md
+api/downloadBlob/sample.dat
+api/getBlobSasUri/sample.dat
+api/listBlobs/sample.dat
+api/rehydrateBlob/sample.dat

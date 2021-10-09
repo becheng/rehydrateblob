@@ -9,13 +9,28 @@ html, body {
   background-color: #fff;
 }
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
 main {
   margin: auto;
-  width: 50%;
+  width: 100%;
   padding: 20px;
 }
 
 main > h1 {
   text-align: center;
-  font-size: 3.5em;
+  font-size: 2.5em;
 }
+
+main > h2 {
+  text-align: center;
+}
+
+main > table, th, td {
+  border: 1px solid gray;
+}
+
