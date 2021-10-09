@@ -6,19 +6,20 @@ module.exports = async function (context, req) {
     console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
     
     // for local development use .env file for environment variables
-    if (process.env.NODE_ENV === 'dev') {
-        loadLocalEnvironmentVariables(context);
-    }
+    // if (process.env.NODE_ENV === 'dev') {
+    loadLocalEnvironmentVariables(context);
+    // }
 
     let responseMessage; 
     const account = process.env.ACCOUNT_NAME || "";
-    const muiClientId = process.env.MUI_CLIENT_ID || "";
+    // const muiClientId = process.env.MUI_CLIENT_ID || "";
     const containerName = process.env.CONTAINER || "";
-    console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@ account=${account}, muiclientId=${muiClientId}, containerName=${containerName}`);
+    // console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@ account=${account}, muiclientId=${muiClientId}, containerName=${containerName}`);
 
 
     // authenticate to storage account; first if  service principal provided (for local dev), then by managed user identity 
-    const defaultAzureCredential = new DefaultAzureCredential({managedIdentityClientId: `${muiClientId}`});
+    // const defaultAzureCredential = new DefaultAzureCredential({managedIdentityClientId: `${muiClientId}`});
+    const defaultAzureCredential = new DefaultAzureCredential();
     const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net`,defaultAzureCredential);
     const containerClient = blobServiceClient.getContainerClient(`${containerName}`);
     
