@@ -13,7 +13,7 @@ module.exports = async function (context, req) {
 
     const account = process.env.ACCOUNT_NAME || "";
     const accountKey = process.env.ACCOUNT_KEY || "";
-    const containerName = process.env.CONTAINER_NAME || "";
+    const containerName = process.env.CONTAINER || "";
         
     const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
     const sasToken = generateSasToken(containerName, blobName, sharedKeyCredential);
