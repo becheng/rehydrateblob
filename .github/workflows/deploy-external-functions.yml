@@ -60,8 +60,10 @@ jobs:
         npm run test --if-present
         popd
 
-    - name: 'Run Azure Functions Action'
-      uses: Azure/functions-action@v1
+    - name: Azure Functions Action
+      uses: Azure/functions-action@v1.4.4
+    # - name: 'Run Azure Functions Action'
+    #   uses: Azure/functions-action@v1
       id: fa
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
