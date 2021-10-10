@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Vanilla JavaScript App</title>
+  <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+</head>
+
+<body>
+  <main>
+    <h1>Requested Archived Blobs - Rehydrated! </h1>
+    <h2>A vanilla javaScript app</h2>
+    <p>Blob list: <div id="list">...</div></p>
+  </main>
+
+  <script>
+
+    async function getBlobSasUri(blobName, divId){
+      const { blobSasUri } =  await (await fetch(`/api/getBlobSasUri?blobName=${blobName}`)).json();
+      document.querySelector(`#blobSasUri-${divId}`).innerHTML = `<a href="${blobSasUri}">download</a>`;
+    }
+
+    async function rehydrateBlob(blobName, divId){
+      const resp = await fetch(`/api/rehydrateBlob?blobName=${blobName}`);
+      const { clientRequestId, requestId } = await resp.json();
+      document.querySelector(`#blobSasUri-${divId}`).innerHTML = `rehydrating...clientRequestId:${clientRequestId}, requestId:${requestId}`;
+    }
+
+    (async function() {
+        let blResp = await fetch(`/api/listBlobs`);
+        let blJson = await blResp.json();
+        let blobs = blJson.blobList;
+        
+        let blHtml='<table id="tblBlobList">';
+        blHtml+=`<tr>`;
+        blHtml+=`<th>Name</th>`;
+        blHtml+=`<th>Type</th>`;
+        blHtml+=`<th>Last Modified</th>`;
+        blHtml+=`<th>BlobTier</th>`;
+        blHtml+=`<th></th>`;
+        blHtml+=`</tr>`; 
+
+        let blobTier, blobName;
+        for (let i=0; i < blobs.length; i++){
+          blobName = blobs[i].name;
+          blobTier = blobs[i].tier;
+
+          blHtml+=`<tr>`;
+          blHtml+=`<td>${blobName}</td>`;
+          blHtml+=`<td>${blobs[i].contentType}</td>`;
+          blHtml+=`<td>${blobs[i].lastModified}</td>`;
+          blHtml+=`<td>${blobTier}</td>`;
+          blHtml+=`<td><a href="/api/downloadBlob?blobName=${blobName}">download</a></td>`;
+          blHtml+=`<td><div id="blobSasUri-${i}">`;
+          if ('archive' === blobTier.toLowerCase()){
+            blHtml+=`<a href="javascript:void(0)" onclick="rehydrateBlob('${blobName}', '${i}')">rehydrate blob!</a>`;
+          } else {
+            blHtml+=`<a href="javascript:void(0)" onclick="getBlobSasUri('${blobName}', '${i}')">Get Sas uri</a>`;
+          }
+          blHtml+=`<div></td>`;
+          blHtml+=`</tr>`; 
+        }
+        blHtml+="</table>";
+        // document.querySelector('#list').textContent = JSON.stringify(blobs, null, 4);
+        document.querySelector('#list').innerHTML = blHtml;
+    }());
+
+  </script>
+
+</body>
+
+</html>
