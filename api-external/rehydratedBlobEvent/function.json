@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "type": "eventGridTrigger",
+      "name": "eventGridEvent",
+      "direction": "in"
+    },
+    {
+      "type": "sendGrid",
+      "name": "message",
+      "direction": "out",
+      "apiKey": "SendGridApiKey",
+      "from": "ben.cheng@gmail.com",
+      "to": "",
+      "subject": "",
+      "text": ""
+    }    
+  ]
+}

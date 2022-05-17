@@ -1,0 +1,59 @@
+
+POST http://localhost:7071/runtime/webhooks/EventGrid?functionName=rehydratedBlobEvent HTTP/1.1
+Content-Type: application/json
+aeg-event-type: Notification
+
+[{
+  "topic": "/subscriptions/6361abf5-cf95-44c4-9350-6dde1d98f1ab/resourceGroups/rehydrateblobwebapp/providers/Microsoft.Storage/storageAccounts/rehydrateblobsa",
+  "subject": "/blobServices/default/containers/default/blobs/hotfile3.txt",
+  "eventType": "Microsoft.Storage.BlobCreated",
+  "id": "2bfb587b-501e-0094-2746-8b2884065d32",
+  "data": {
+    "api": "CopyBlob",
+    "clientRequestId": "3d4dedc7-6c27-4816-9405-fdbfa806b00c",
+    "requestId": "2bfb587b-501e-0094-2746-8b2884000000",
+    "eTag": "0x8D9595DCA505BDF",
+    "contentType": "text/plain",
+    "contentLength": 48,
+    "blobType": "BlockBlob",
+    "url": "https://rehydrateblobsa.blob.core.windows.net/default/hotfile3.txt",
+    "sequencer": "0000000000000000000000000000201B00000000004092a5",
+    "storageDiagnostics": {
+      "batchId": "8a92736a-6006-0026-0046-8bd7f5000000"
+    }
+  },
+  "dataVersion": "",
+  "metadataVersion": "1",
+  "eventTime": "2021-08-07T04:42:41.0730463Z"
+}]
+
+
+###
+
+POST http://localhost:7071/runtime/webhooks/EventGrid?functionName=EventGridTrigger1 HTTP/1.1
+Content-Type: application/json
+aeg-event-type: Notification
+
+[{
+  "topic": "/subscriptions/6361abf5-cf95-44c4-9350-6dde1d98f1ab/resourceGroups/rehydrateblobwebapp/providers/Microsoft.Storage/storageAccounts/rehydrateblobsa",
+  "subject": "/blobServices/default/containers/default/blobs/hotfile3.txt",
+  "eventType": "Microsoft.Storage.BlobCreated",
+  "id": "2bfb587b-501e-0094-2746-8b2884065d32",
+  "data": {
+    "api": "CopyBlob",
+    "clientRequestId": "3d4dedc7-6c27-4816-9405-fdbfa806b00c",
+    "requestId": "2bfb587b-501e-0094-2746-8b2884000000",
+    "eTag": "0x8D9595DCA505BDF",
+    "contentType": "text/plain",
+    "contentLength": 48,
+    "blobType": "BlockBlob",
+    "url": "https://rehydrateblobsa.blob.core.windows.net/default/hotfile3.txt",
+    "sequencer": "0000000000000000000000000000201B00000000004092a5",
+    "storageDiagnostics": {
+      "batchId": "8a92736a-6006-0026-0046-8bd7f5000000"
+    }
+  },
+  "dataVersion": "",
+  "metadataVersion": "1",
+  "eventTime": "2021-08-07T04:42:41.0730463Z"
+}]

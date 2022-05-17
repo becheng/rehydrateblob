@@ -3,12 +3,12 @@ const { DefaultAzureCredential } = require("@azure/identity");
 
 module.exports = async function (context, req) {
 
-    console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+    // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
     
-    // for local development use .env file for environment variables
-    if (process.env.NODE_ENV === 'dev') {
-        loadLocalEnvironmentVariables(context);
-    }
+    // // for local development use .env file for environment variables
+    // if (process.env.NODE_ENV === 'dev') {
+    //     loadLocalEnvironmentVariables(context);
+    // }
 
     let responseMessage; 
     const account = process.env.ACCOUNT_NAME || "";
